@@ -79,7 +79,7 @@ void Roster::printInvalidEmails()
     for (int i = 0; i <= Roster::lastIndex; i++)
     {
         string sEmailAddress = (classRosterArray[i]->getEmailAddress());
-        if (sEmailAddress.find('@') == string::npos && sEmailAddress.find('.') == string::npos && sEmailAddress.find(' ') != string::npos) //Valid email should include an @ sign and a . sign. It should not include a space
+        if (sEmailAddress.find('@') == string::npos || sEmailAddress.find('.') == string::npos || sEmailAddress.find(' ') != string::npos) //Valid email should include an @ sign and a . sign. It should not include a space
         {
             any = true;
             cout << sEmailAddress << ": " << classRosterArray[i]->getEmailAddress() << std::endl;

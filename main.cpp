@@ -15,13 +15,13 @@ int main()
     Roster roster;
 
     for (int i = 0; i < numStudents; i++) roster.parse(studentData[i]);
-    cout << "Displaying all books: " << std::endl;
+    cout << "All students: " << std::endl;
     roster.printAll();
     cout << std::endl;
 
     for (int i = 0; i < 3; i++)
     {
-        cout << "Displaying by degree: " << degreeTypeStrings[i] << std::endl;
+        cout << "Degree: " << degreeTypeStrings[i] << std::endl;
         roster.printByDegreeProgram((DegreeType)i);
     }
 
@@ -29,7 +29,7 @@ int main()
     roster.printInvalidEmails();
     cout << std::endl;
 
-    cout << "Displaying average days: " << std::endl;
+    cout << "Average days: " << std::endl;
     roster.printAverageDaysInCourse();
 
     cout << "Removing student with ID A3: " << std::endl;
