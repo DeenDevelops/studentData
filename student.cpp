@@ -57,5 +57,5 @@ void Student::print()
 
 void Student::printHeader()
 {
-    cout << "Format: ID|First Name|Last Name|Email Address|Age|Days|Degree\n";
+    cout << "ID|First Name|Last Name|Email Address|Age|Days|Degree\n";
 }

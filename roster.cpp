@@ -82,12 +82,12 @@ void Roster::printInvalidEmails()
         if (sEmailAddress.find('@') == string::npos || sEmailAddress.find('.') == string::npos || sEmailAddress.find(' ') != string::npos) //Valid email should include an @ sign and a . sign. It should not include a space
         {
             any = true;
-            cout << sEmailAddress << ": " << classRosterArray[i]->getEmailAddress() << std::endl;
+            cout << sEmailAddress << std::endl;
         }
     }
     if (!any) cout << "NONE" << std::endl;
 }
- void Roster::printAverageDaysInCourse()
+ void Roster::printAverageDaysInCourse() //simply gets the average of days for each student
  {
     for (int i = 0; i <= Roster::lastIndex; i++)
     {
@@ -97,33 +97,42 @@ void Roster::printInvalidEmails()
     cout << std::endl;
  }
 
- void Roster::remove(string studentID) //We remove student based on ID, in this case A3
- {
+void Roster::remove(string studentID)
+{
     bool flag = false;
     for (int i = 0; i <= Roster::lastIndex; i++)
     {
         if (classRosterArray[i]->getID() == studentID)
         {
             flag = true;
-            if (i < numStudents - 1)
+            delete classRosterArray[i]; //Delete the student object from memory
+            
+            if (i < Roster::lastIndex)
             {
-                Student* temp = classRosterArray[i]; //last student gets switched
-                classRosterArray[i] = classRosterArray[numStudents - 1];
-                classRosterArray[numStudents - 1] = temp;
+                classRosterArray[i] = classRosterArray[Roster::lastIndex];
+                classRosterArray[Roster::lastIndex] = nullptr; //Set the last entry to nullptr
             }
+            else
+            {
+                classRosterArray[i] = nullptr;
+            }        
+            Roster::lastIndex--;
+            break; //Exit the loop since the student is found and removed
         }
     }
+
     if(flag)
     {
         cout << studentID << " removed from table." << std::endl << std::endl;
         this->printAll(); //Everything but the removed student will be displayed
     }
     else cout << studentID << " not found." << std::endl << std::endl;
- }
+}
+
 
  Roster::~Roster()
  {
-    cout << "Destructing..." << std::endl << std::endl;
+    cout << "Releasing memory..." << std::endl << std::endl;
     for (int i = 0; i < numStudents; i++)
     {
         cout << "Removing student: " << i + 1 << std::endl;
